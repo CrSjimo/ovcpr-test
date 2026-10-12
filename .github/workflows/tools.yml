@@ -12,13 +12,17 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: tools/ovcpr
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           persist-credentials: false
       - uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16
         with:
-          go-version-file: go.mod
+          go-version-file: tools/ovcpr/go.mod
+          cache-dependency-path: tools/ovcpr/go.sum
       - run: go test -race ./...
       - run: go vet ./...
       - name: Build without CGO

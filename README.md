@@ -1,6 +1,7 @@
 # OVCPR
 
 OVCPR is a GitHub-hosted community package source for DiffScope Package Manager.
+The Go validator/indexer module is contained in `tools/ovcpr/`; CI coordination scripts are in `tools/`.
 It stores immutable OVCPR v1 package manifests and documentation. Release
 archives stay at publishers' public HTTPS URLs. GitHub Pages serves generated
 indexes under `/packages/`.
@@ -8,6 +9,7 @@ indexes under `/packages/`.
 Build the CGO-free tool with Go 1.26.1 or newer:
 
 ```sh
+cd tools/ovcpr
 go build ./cmd/ovcpr
 go test -race ./...
 go vet ./...
