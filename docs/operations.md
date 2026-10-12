@@ -31,8 +31,8 @@ rollback to old metadata.
 For production `ovcpr.diffscope.org`, configure the custom domain in Pages settings,
 point its DNS CNAME at the repository owner's `<owner>.github.io`, wait for the
 certificate and enable enforced HTTPS. A source CNAME file is insufficient.
-Integration testing uses the test repository's github.io URL and does not change
-production DNS.
+Integration testing uses the URL returned by the test repository's Pages API;
+an owner-level custom domain can be inherited. It does not change production DNS.
 
 Starting budgets are 4 GiB compressed, 8 GiB expanded, 4 GiB per package file,
 20 minutes per archive, 64 MiB repository manifests, 10,000 versions, 100,000

@@ -4,6 +4,7 @@ package repository
 import (
 	"bytes"
 	"context"
+	"errors"
 	"fmt"
 	dep "github.com/diffscope/diffscope-package-manager/packagedependency"
 	"github.com/diffscope/diffscope-package-manager/packageinfo"
@@ -23,8 +24,15 @@ type Error struct {
 	Details any    `json:"details,omitempty"`
 }
 
-func (e *Error) Error() string             { return e.Code + ": " + e.Message }
-func fail(code, p string, err error) error { return &Error{Code: code, Path: p, Message: err.Error()} }
+func (e *Error) Error() string { return e.Code + ": " + e.Message }
+func fail(code, p string, err error) error {
+	result := &Error{Code: code, Path: p, Message: err.Error()}
+	var graph *dep.Error
+	if errors.As(err, &graph) {
+		result.Details = map[string]any{"kind": graph.Kind, "root": graph.Root, "requester": graph.Requester, "required": graph.Required, "chain": graph.Chain}
+	}
+	return result
+}
 
 type Version struct {
 	Manifest repo.RemoteManifest
