@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ovcpr:versions-index:v1",
+  "title": "OVCPR v1 generated package versions index (design draft)",
+  "$comment": "Generated only. Numeric descending sort, uniqueness by version, compatVersion <= version, latest maximum including deprecated versions, directory identity and manifest byte hashes require procedural validation. Deprecated versions remain available and selectable. Repository revision belongs only in the root packages index so unrelated commits do not change this file.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "repositoryFormatVersion",
+    "id",
+    "latestVersion",
+    "versions"
+  ],
+  "properties": {
+    "repositoryFormatVersion": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "#/$defs/packageId"
+    },
+    "latestVersion": {
+      "$ref": "#/$defs/version"
+    },
+    "versions": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "version",
+          "compatVersion",
+          "manifestSha512",
+          "deprecated"
+        ],
+        "properties": {
+          "version": {
+            "$ref": "#/$defs/version"
+          },
+          "compatVersion": {
+            "$ref": "#/$defs/version"
+          },
+          "manifestSha512": {
+            "$ref": "#/$defs/sha512"
+          },
+          "deprecated": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "packageId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9_-]+(?:/[A-Za-z0-9_-]+)*(?![\\s\\S])"
+    },
+    "version": {
+      "type": "string",
+      "maxLength": 128,
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?![\\s\\S])"
+    },
+    "sha512": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{128}(?![\\s\\S])"
+    }
+  }
+}

@@ -1,0 +1,209 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ovcpr:manifest:v1",
+  "title": "OVCPR v1 remote package manifest (design draft)",
+  "$comment": "Strict JSON parsing, byte budgets, portable paths, directory identity, version ordering, dependency graph, URL network policy, baseline immutability and archive/asset equality require procedural validation. Only deprecated/deprecationReason may change on a published version; deprecation does not affect resolution or installation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "repositoryFormatVersion",
+    "id",
+    "version",
+    "compatVersion",
+    "downloadUrl",
+    "downloadSha512",
+    "dependencies",
+    "singers"
+  ],
+  "properties": {
+    "repositoryFormatVersion": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "#/$defs/packageId"
+    },
+    "version": {
+      "$ref": "#/$defs/version"
+    },
+    "compatVersion": {
+      "$ref": "#/$defs/version"
+    },
+    "name": {
+      "$ref": "#/$defs/text"
+    },
+    "description": {
+      "$ref": "#/$defs/text"
+    },
+    "vendor": {
+      "$ref": "#/$defs/text"
+    },
+    "license": {
+      "$ref": "#/$defs/assetPaths"
+    },
+    "readme": {
+      "$ref": "#/$defs/assetPaths"
+    },
+    "url": {
+      "anyOf": [
+        {
+          "const": ""
+        },
+        {
+          "type": "string",
+          "pattern": "^[Hh][Tt][Tt][Pp][Ss]?://[^\\s]+(?![\\s\\S])",
+          "format": "uri"
+        }
+      ]
+    },
+    "downloadUrl": {
+      "type": "string",
+      "pattern": "^[Hh][Tt][Tt][Pp][Ss]://[^\\s#]+(?![\\s\\S])",
+      "format": "uri"
+    },
+    "downloadSha512": {
+      "$ref": "#/$defs/sha512"
+    },
+    "dependencies": {
+      "type": "array",
+      "maxItems": 1024,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/dependency"
+      }
+    },
+    "singers": {
+      "type": "array",
+      "maxItems": 1024,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/singer"
+      }
+    },
+    "deprecated": {
+      "type": "boolean"
+    },
+    "deprecationReason": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    }
+  },
+  "if": {
+    "required": [
+      "deprecated"
+    ],
+    "properties": {
+      "deprecated": {
+        "const": true
+      }
+    }
+  },
+  "then": {
+    "required": [
+      "deprecationReason"
+    ]
+  },
+  "else": {
+    "not": {
+      "required": [
+        "deprecationReason"
+      ]
+    }
+  },
+  "$defs": {
+    "packageId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9_-]+(?:/[A-Za-z0-9_-]+)*(?![\\s\\S])"
+    },
+    "genericId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_-]+(?![\\s\\S])"
+    },
+    "dottedId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_-]+(?:\\.[A-Za-z0-9_-]+)*(?![\\s\\S])"
+    },
+    "version": {
+      "type": "string",
+      "maxLength": 128,
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?![\\s\\S])"
+    },
+    "sha512": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{128}(?![\\s\\S])"
+    },
+    "text": {
+      "type": "object",
+      "required": [
+        "_"
+      ],
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "assetPath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 220,
+      "pattern": "^(?!.*(?:^|/)\\.{1,2}(?:/|$))[^/\\\\:?#\\u0000-\\u001f\\u007f]+(?:/[^/\\\\:?#\\u0000-\\u001f\\u007f]+)*(?![\\s\\S])"
+    },
+    "assetPaths": {
+      "type": "object",
+      "required": [
+        "_"
+      ],
+      "additionalProperties": {
+        "$ref": "#/$defs/assetPath"
+      }
+    },
+    "dependency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/packageId"
+        },
+        "version": {
+          "$ref": "#/$defs/version"
+        }
+      }
+    },
+    "singer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "interface",
+        "variant",
+        "level"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/genericId"
+        },
+        "name": {
+          "$ref": "#/$defs/text"
+        },
+        "interface": {
+          "$ref": "#/$defs/dottedId"
+        },
+        "variant": {
+          "$ref": "#/$defs/dottedId"
+        },
+        "level": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*(?![\\s\\S])"
+        }
+      }
+    }
+  }
+}

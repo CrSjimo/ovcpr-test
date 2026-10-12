@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ovcpr:packages-index:v1",
+  "title": "OVCPR v1 generated repository packages index (design draft)",
+  "$comment": "Generated only. ASCII ascending ID order, uniqueness by ID, complete package enumeration, latestVersion consistency including deprecated versions, common revision and versions index byte hashes require procedural validation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "repositoryFormatVersion",
+    "repositoryRevision",
+    "packages"
+  ],
+  "properties": {
+    "repositoryFormatVersion": {
+      "const": 1
+    },
+    "repositoryRevision": {
+      "$ref": "#/$defs/revision"
+    },
+    "packages": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "latestVersion",
+          "versionsIndexSha512"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/packageId"
+          },
+          "latestVersion": {
+            "$ref": "#/$defs/version"
+          },
+          "versionsIndexSha512": {
+            "$ref": "#/$defs/sha512"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "packageId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9_-]+(?:/[A-Za-z0-9_-]+)*(?![\\s\\S])"
+    },
+    "version": {
+      "type": "string",
+      "maxLength": 128,
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?![\\s\\S])"
+    },
+    "sha512": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{128}(?![\\s\\S])"
+    },
+    "revision": {
+      "type": "string",
+      "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})(?![\\s\\S])"
+    }
+  }
+}
