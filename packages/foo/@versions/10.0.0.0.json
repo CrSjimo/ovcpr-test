@@ -1,0 +1,21 @@
+{
+  "repositoryFormatVersion": 1,
+  "id": "foo",
+  "version": "10.0.0.0",
+  "compatVersion": "1.0.0.0",
+  "name": {
+    "_": "foo",
+    "zh-CN": "测试资源包"
+  },
+  "license": {
+    "_": "10.0.0.0/LICENSE",
+    "zh-CN": "10.0.0.0/LICENSE"
+  },
+  "readme": {
+    "_": "10.0.0.0/README.md"
+  },
+  "dependencies": [],
+  "singers": [],
+  "downloadUrl": "https://github.com/CrSjimo/ovcpr-test/releases/download/fixtures-v1/foo-10.dspk",
+  "downloadSha512": "a9bf37c51aee9250cb4eef51816b0d915a699e12f4fab4f5e4f0c47746687d7c92ca5f52eafe9a887ed36e3bb7db82ef8f711eebf2b457e5aa98f6707f04dc65"
+}

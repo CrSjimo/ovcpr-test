@@ -1,0 +1,37 @@
+{
+  "repositoryFormatVersion": 1,
+  "id": "foo/bar",
+  "version": "1.0.0.0",
+  "compatVersion": "1.0.0.0",
+  "name": {
+    "_": "foo/bar",
+    "zh-CN": "测试资源包"
+  },
+  "license": {
+    "_": "1.0.0.0/LICENSE",
+    "zh-CN": "1.0.0.0/LICENSE"
+  },
+  "readme": {
+    "_": "1.0.0.0/README.md"
+  },
+  "dependencies": [
+    {
+      "id": "base",
+      "version": "1.0.0.0"
+    }
+  ],
+  "singers": [
+    {
+      "id": "main",
+      "name": {
+        "_": "",
+        "zh-CN": "测试歌手"
+      },
+      "interface": "org.openvpi.test.Singer",
+      "variant": "integration",
+      "level": "123456789012345678901234567890"
+    }
+  ],
+  "downloadUrl": "https://github.com/CrSjimo/ovcpr-test/releases/download/fixtures-v1/foo_bar-1.dspk",
+  "downloadSha512": "ccd515aceff5a7b3910fd5ff1dda5e4a1e2354ba522eb078c4481374ae660310370eaf9bcfe01ea980e47a318e8892907f1c719118b83ed5fd11ad3cdf8c9568"
+}
