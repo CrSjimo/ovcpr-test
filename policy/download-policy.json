@@ -1,9 +1,3 @@
 {
-  "policyVersion": 1,
-  "maxDownloadBytes": 4294967296,
-  "maxExpandedBytes": 8589934592,
-  "maxFileBytes": 4294967296,
-  "timeoutSeconds": 1200,
-  "allowedPorts": ["443"],
-  "maxRedirects": 5
+  "policyVersion": 999
 }
