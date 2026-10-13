@@ -1,15 +1,15 @@
 {
   "platforms": {
     "linux-amd64": {
-      "indexer": {
-        "url": "https://github.com/CrSjimo/ovcpr-test/releases/download/toolchain-flow-20261013/ovcpr-linux-amd64",
-        "version": "0.1.0-flow.20261013",
-        "sha256": "4b078535d21f00896b67cc1631ddd87af7e8273385cd6c66cb07d9c56fb7c228"
-      },
       "validator": {
-        "url": "https://github.com/CrSjimo/ovcpr-test/releases/download/toolchain-flow-20261013/ovcpr-linux-amd64",
-        "version": "0.1.0-flow.20261013",
-        "sha256": "4b078535d21f00896b67cc1631ddd87af7e8273385cd6c66cb07d9c56fb7c228"
+        "url": "https://github.com/CrSjimo/ovcpr-test/releases/download/toolchain-flow-20261013.1/ovcpr-linux-amd64",
+        "version": "0.1.0-flow.20261013.1",
+        "sha256": "52f60b0b938bfd8639a0b16a4ab71638b2f88e7d29a296a17e75187b258cfdee"
+      },
+      "indexer": {
+        "url": "https://github.com/CrSjimo/ovcpr-test/releases/download/toolchain-flow-20261013.1/ovcpr-linux-amd64",
+        "version": "0.1.0-flow.20261013.1",
+        "sha256": "52f60b0b938bfd8639a0b16a4ab71638b2f88e7d29a296a17e75187b258cfdee"
       }
     }
   },
