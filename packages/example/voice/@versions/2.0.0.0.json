@@ -1,0 +1,44 @@
+{
+  "repositoryFormatVersion": 1,
+  "id": "example/voice",
+  "version": "2.0.0.0",
+  "compatVersion": "1.0.0.0",
+  "name": {
+    "_": "example/voice",
+    "zh-CN": "测试资源包"
+  },
+  "description": {
+    "_": "Synthetic resource package for isolated integration verification."
+  },
+  "vendor": {
+    "_": "OVCPR integration fixtures"
+  },
+  "license": {
+    "_": "2.0.0.0/docs/LICENSE",
+    "zh-CN": "2.0.0.0/docs/LICENSE.zh-CN"
+  },
+  "readme": {
+    "_": "2.0.0.0/docs/README"
+  },
+  "dependencies": [
+    {
+      "id": "base",
+      "version": "1.0.0.0"
+    }
+  ],
+  "singers": [
+    {
+      "id": "main",
+      "name": {
+        "_": "Fixture Voice",
+        "zh-CN": "测试歌手"
+      },
+      "interface": "example.Singer",
+      "variant": "example.Native",
+      "level": 2
+    }
+  ],
+  "downloadUrl": "https://github.com/CrSjimo/ovcpr-test/releases/download/packages-flow-20261013/example-voice-2.dspk",
+  "downloadSha512": "0517e5eb3ed711aa5e671c9ba6cc4b760d037e37836dafd3db8a2370a2d6bd45c0fa72ff4362880b377c4ad6a265fd19c6689526f4a9d5aadfdf7280ea0d6682",
+  "downloadSize": 132627
+}
