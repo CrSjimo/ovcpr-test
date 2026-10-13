@@ -1,0 +1,6 @@
+/.dspm-repo/
+/site/
+/dist/
+*.exe
+go.work
+go.work.sum

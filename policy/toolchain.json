@@ -1,0 +1,17 @@
+{
+  "platforms": {
+    "linux-amd64": {
+      "indexer": {
+        "url": "https://github.com/CrSjimo/ovcpr-test/releases/download/toolchain-v0.1.0-test.2/ovcpr-linux-amd64-v2",
+        "version": "0.1.0-test.2",
+        "sha256": "ceeed4ed7bb95a01d9e6ff7fd01562d1ee1198f3a5287f2009b27a5fbb13a644"
+      },
+      "validator": {
+        "url": "https://github.com/CrSjimo/ovcpr-test/releases/download/toolchain-v0.1.0-test.2/ovcpr-linux-amd64-v2",
+        "version": "0.1.0-test.2",
+        "sha256": "ceeed4ed7bb95a01d9e6ff7fd01562d1ee1198f3a5287f2009b27a5fbb13a644"
+      }
+    }
+  },
+  "toolchainVersion": 1
+}

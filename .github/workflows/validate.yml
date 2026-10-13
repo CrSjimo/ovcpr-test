@@ -1,0 +1,89 @@
+name: Repository validation
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  merge_group:
+    types: [checks_requested]
+permissions:
+  contents: read
+jobs:
+  validation:
+    name: ${{ matrix.check }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - stage: structure
+            check: repository-structure
+          - stage: validate
+            check: package-validation
+          - stage: build
+            check: pages-build
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          path: candidate
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Candidate and protected baseline selection
+        id: inputs
+        env:
+          FIXED_SHA: ${{ github.sha }}
+        run: |
+          python - <<'PY'
+          import json, os, re, subprocess
+          event=json.load(open(os.environ['GITHUB_EVENT_PATH']))
+          sha=os.environ['FIXED_SHA']
+          assert re.fullmatch(r'[0-9a-f]{40,64}', sha)
+          def git(*args):
+              return subprocess.check_output(['git','-C','candidate',*args],text=True).strip()
+          if os.environ['GITHUB_EVENT_NAME']=='pull_request':
+              parents=git('rev-list','--parents','-n','1',sha).split()
+              assert len(parents)==3 and parents[2]==event['pull_request']['head']['sha']
+              base=parents[1]
+              git('fetch','--no-tags','origin','main')
+              assert git('rev-parse','FETCH_HEAD')==base, 'The candidate must include current main.'
+          else:
+              assert sha==event['merge_group']['head_sha']
+              base=event['merge_group']['base_sha']
+              assert re.fullmatch(r'[0-9a-f]{40,64}',base)
+              git('fetch','--no-tags','origin',base)
+          with open(os.environ['GITHUB_OUTPUT'],'a') as out:
+              out.write('base='+base+'\ncandidate='+sha+'\n')
+          PY
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ steps.inputs.outputs.base }}
+          path: trusted
+          persist-credentials: false
+      - name: Candidate validation with protected tools
+        env:
+          BASE: ${{ steps.inputs.outputs.base }}
+          CANDIDATE: ${{ steps.inputs.outputs.candidate }}
+          STAGE: ${{ matrix.stage }}
+        run: |
+          cd "$RUNNER_TEMP"
+          python "$GITHUB_WORKSPACE/trusted/tools/ci.py" --stage "$STAGE" --repository "$GITHUB_WORKSPACE/candidate" --baseline-sha "$BASE" --candidate-sha "$CANDIDATE" --output "$RUNNER_TEMP/review-site"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: matrix.stage == 'build'
+        with:
+          name: reviewed-site-${{ github.sha }}
+          path: ${{ runner.temp }}/review-site/
+          if-no-files-found: error
+  required-validation:
+    if: always()
+    needs: [validation]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Required validation results
+        env:
+          RESULTS: ${{ toJSON(needs) }}
+        run: |
+          python - <<'PY'
+          import json, os
+          checks=json.loads(os.environ['RESULTS'])
+          assert set(checks)=={'validation'}
+          assert all(c['result']=='success' for c in checks.values()), checks
+          PY
