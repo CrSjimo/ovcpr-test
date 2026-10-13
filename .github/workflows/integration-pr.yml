@@ -1,0 +1,29 @@
+name: Open integration test PR
+on:
+  workflow_dispatch:
+    inputs:
+      head:
+        description: Existing codex/test-* branch in this test repository
+        required: true
+        type: string
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  open-pr:
+    if: github.repository == 'CrSjimo/ovcpr-test' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create bot-authored PR for maintainer review tests
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_BRANCH: ${{ inputs.head }}
+        run: |
+          python - <<'PY'
+          import json, os, re
+          head=os.environ['HEAD_BRANCH']
+          assert re.fullmatch(r'codex/test-[A-Za-z0-9_-]+',head)
+          with open(os.environ['RUNNER_TEMP']+'/pr.json','w') as out:
+              json.dump({'head':head,'base':'main','title':'Integration verification: '+head,'body':'Isolated OVCPR integration test. Validate all required CI and maintainer review before merging.'},out)
+          PY
+          gh api --method POST "repos/$GITHUB_REPOSITORY/pulls" --input "$RUNNER_TEMP/pr.json" --jq .html_url

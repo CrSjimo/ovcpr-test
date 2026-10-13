@@ -1,0 +1,34 @@
+name: DSPM current source tests
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  dspm:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: _dspm
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16
+        with:
+          go-version-file: _dspm/go.mod
+          cache-dependency-path: _dspm/go.sum
+      - name: Windows compiler configuration
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $compiler = Get-Command gcc -ErrorAction Stop
+          "CC=$($compiler.Source)" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+      - run: go vet ./...
+      - run: go test -race ./...
+      - run: go build -trimpath -o dspm-test ./cmd/dspm
