@@ -1,0 +1,13 @@
+{
+  "repositoryFormatVersion": 1,
+  "id": "shared",
+  "latestVersion": "3.0.0.0",
+  "versions": [
+    {
+      "version": "3.0.0.0",
+      "compatVersion": "1.0.0.0",
+      "manifestSha512": "9a2b9adb38e396347952919f0003a1072404067f7eb9ff6e27d4af377e570054f89c73bafdc4fa96da1614bcc1302ea5077f8b446f09cbae4573088880146b07",
+      "deprecated": false
+    }
+  ]
+}

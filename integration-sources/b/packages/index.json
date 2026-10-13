@@ -1,0 +1,16 @@
+{
+  "repositoryFormatVersion": 1,
+  "repositoryRevision": "b5d7668acee2d410442dc88987d8f475b9b667fb",
+  "packages": [
+    {
+      "id": "app-c",
+      "latestVersion": "1.0.0.0",
+      "versionsIndexSha512": "498d0c14b7da604b86fdb3db774dcf4fc75f55d7136e58e5149aa48e294c26799e97e373fc236423e9e1775c10b674edfe0c612125f6702352c33c29a82a7c67"
+    },
+    {
+      "id": "shared",
+      "latestVersion": "3.0.0.0",
+      "versionsIndexSha512": "99eb1305b57f24697557298272752eff32600257116a21af3e411485b82bd0306d2ec0e72780ca31eaae6ecbdd2822497ae508dc380af97f763320eaf331fadf"
+    }
+  ]
+}

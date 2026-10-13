@@ -1,0 +1,13 @@
+{
+  "repositoryFormatVersion": 1,
+  "id": "app-a",
+  "latestVersion": "1.0.0.0",
+  "versions": [
+    {
+      "version": "1.0.0.0",
+      "compatVersion": "1.0.0.0",
+      "manifestSha512": "9a71e5759098ad7b62ed2650e204967776a4b4f5e4be4be51a40bbb5f5fc20cfbcb673343f71dafb856af2ff13f0a561af7eda45fd9c87e66fa680f959a7912b",
+      "deprecated": false
+    }
+  ]
+}

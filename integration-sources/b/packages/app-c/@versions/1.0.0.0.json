@@ -1,0 +1,33 @@
+{
+  "repositoryFormatVersion": 1,
+  "id": "app-c",
+  "version": "1.0.0.0",
+  "compatVersion": "1.0.0.0",
+  "name": {
+    "_": "app-c",
+    "zh-CN": "测试资源包"
+  },
+  "description": {
+    "_": "Synthetic resource package for isolated integration verification."
+  },
+  "vendor": {
+    "_": "OVCPR integration fixtures"
+  },
+  "license": {
+    "_": "1.0.0.0/docs/LICENSE",
+    "zh-CN": "1.0.0.0/docs/LICENSE.zh-CN"
+  },
+  "readme": {
+    "_": "1.0.0.0/docs/README"
+  },
+  "dependencies": [
+    {
+      "id": "shared",
+      "version": "2.0.0.0"
+    }
+  ],
+  "singers": [],
+  "downloadUrl": "https://github.com/CrSjimo/ovcpr-test/releases/download/packages-flow-20261013/app-c-1.dspk",
+  "downloadSha512": "da78e032491767379c049d502f708480f3738018b79647d467478c00d1b7d04b57c2bf26a01ce4da4f39b93b8b96844183b693f32e0fb203467e88236efa9a1e",
+  "downloadSize": 132145
+}

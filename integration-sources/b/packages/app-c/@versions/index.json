@@ -1,0 +1,13 @@
+{
+  "repositoryFormatVersion": 1,
+  "id": "app-c",
+  "latestVersion": "1.0.0.0",
+  "versions": [
+    {
+      "version": "1.0.0.0",
+      "compatVersion": "1.0.0.0",
+      "manifestSha512": "b7075af4caf6c9d5dc6feaec8005401fcaec0e0fd8acc693b31c19e4ee3e2cec5f696d2bda086ebdd706e27df34b6fc88e3d032f109246e022e770c6d79ec586",
+      "deprecated": false
+    }
+  ]
+}
