@@ -1,0 +1,39 @@
+{
+  "repositoryFormatVersion": 1,
+  "id": "bad-metadata",
+  "version": "1.0.0.0",
+  "compatVersion": "1.0.0.0",
+  "name": {
+    "_": "bad-metadata",
+    "zh-CN": "测试资源包"
+  },
+  "description": {
+    "_": "Synthetic resource package for isolated integration verification."
+  },
+  "vendor": {
+    "_": "OVCPR integration fixtures"
+  },
+  "license": {
+    "_": "1.0.0.0/docs/LICENSE",
+    "zh-CN": "1.0.0.0/docs/LICENSE.zh-CN"
+  },
+  "readme": {
+    "_": "1.0.0.0/docs/README"
+  },
+  "dependencies": [],
+  "singers": [
+    {
+      "id": "main",
+      "name": {
+        "_": "Fixture Voice",
+        "zh-CN": "测试歌手"
+      },
+      "interface": "example.Singer",
+      "variant": "example.Native",
+      "level": 3
+    }
+  ],
+  "downloadUrl": "https://github.com/CrSjimo/ovcpr-test/releases/download/packages-flow-20261013/bad-metadata-1.dspk",
+  "downloadSha512": "0336a14bfed896d2894883ec5fe8190cb21e39e6e9ea20df8c50e323ca2555adecc3f7494ca0d514a33201733c8c747ecf12bd5b82f87b2936fa198db0347ad7",
+  "downloadSize": 132595
+}
