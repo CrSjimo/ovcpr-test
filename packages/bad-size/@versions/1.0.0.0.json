@@ -1,0 +1,28 @@
+{
+  "repositoryFormatVersion": 1,
+  "id": "bad-size",
+  "version": "1.0.0.0",
+  "compatVersion": "1.0.0.0",
+  "name": {
+    "_": "bad-size",
+    "zh-CN": "测试资源包"
+  },
+  "description": {
+    "_": "Synthetic resource package for isolated integration verification."
+  },
+  "vendor": {
+    "_": "OVCPR integration fixtures"
+  },
+  "license": {
+    "_": "1.0.0.0/docs/LICENSE",
+    "zh-CN": "1.0.0.0/docs/LICENSE.zh-CN"
+  },
+  "readme": {
+    "_": "1.0.0.0/docs/README"
+  },
+  "dependencies": [],
+  "singers": [],
+  "downloadUrl": "https://github.com/CrSjimo/ovcpr-test/releases/download/packages-flow-20261013/bad-size-1.dspk",
+  "downloadSha512": "9a466d4c9db904513a50aa436b842a5c8a77b23297ea945d555b5b3632d6780af11bef0269f90a8f8d85d837d77beb20673416823f5545213b8e39dab77ffc62",
+  "downloadSize": 132120
+}
